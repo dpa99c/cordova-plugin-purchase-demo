@@ -76,37 +76,37 @@ app.initStore = function() {
     // Inform the store of your products
     log('registerProducts');
     store.register({
-        id:    'consumable1', // id without package name!
+        id:    'uk.co.workingedge.test.inapp.consumable1', 
         alias: 'extra life',
         type:   store.CONSUMABLE
     });
 
     store.register({
-        id:    'nonconsumable1', // id without package name!
+        id:    'uk.co.workingedge.test.inapp.nonconsumable1', 
         alias: 'full version',
         type:   store.NON_CONSUMABLE
     });
 
     store.register({
-        id:    'subscription1', // id without package name!
+        id:    'uk.co.workingedge.test.inapp.subscription1', 
         alias: 'subscription1',
         type:  store.PAID_SUBSCRIPTION
     });
 
     store.register({
-        id:    'nonconsumablenonhosted1', // id without package name!
+        id:    'uk.co.workingedge.test.inapp.nonconsumablenonhosted1', 
         alias: 'non-hosted content download',
         type:   store.NON_CONSUMABLE
     });
 
     if(app.platform === "ios"){
         store.register({
-            id:    'nonconsumablehosted1', // id without package name!
+            id:    'uk.co.workingedge.test.inapp.nonconsumablehosted1', 
             alias: 'hosted content download',
             type:   store.NON_CONSUMABLE
         });
         store.register({
-            id:    'nonconsumablehosted2', // id without package name!
+            id:    'uk.co.workingedge.test.inapp.nonconsumablehosted2', 
             alias: 'hosted content download 2',
             type:   store.NON_CONSUMABLE
         });
@@ -323,7 +323,7 @@ app.initStore = function() {
 
 app.renderIAP = function(p) {
 
-    var elId = p.id.split(".")[3];
+    var elId = p.id.split(".").pop();
 
     var el = document.getElementById(elId + '-purchase');
     if (!el) return;
