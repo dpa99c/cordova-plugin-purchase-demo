@@ -105,6 +105,11 @@ app.initStore = function() {
             alias: 'hosted content download',
             type:   store.NON_CONSUMABLE
         });
+        store.register({
+            id:    'nonconsumablehosted2', // id without package name!
+            alias: 'hosted content download 2',
+            type:   store.NON_CONSUMABLE
+        });
     }
 
 
@@ -191,6 +196,36 @@ app.initStore = function() {
         if(product.downloaded){
             var productName = product.id.split(".").pop();
             displayDownloadedContent(cordova.file.documentsDirectory + productName, displayEl);
+        }
+    });
+
+    // When purchase of the downloadable content is approved,
+    // show some logs.
+    store.when("hosted content download 2").approved(function (product) {
+        log("You've purchased the content for " + product.id + " - it will now download to your device!");
+    });
+
+    // Show progress during hosted content download
+    store.when("hosted content download 2").downloading(function(product) {
+        var html = 'Downloading content: ' + product.progress + '%';
+        document.getElementById('non-consumable-hosted-content-download').innerHTML = html;
+    });
+
+    // When hosted content download is complete, finish the transaction
+    store.when("hosted content download 2").downloaded(function(product) {
+        product.finish();
+    });
+
+    // If the product content is downloading or downloaded, display the downloaded content
+    store.when("hosted content download 2").updated(function (product) {
+        var displayEl = document.getElementById("non-consumable-hosted-content-download");
+        if(product.downloading || product.downloaded){
+            displayEl.style.display = "block";
+        }else{
+            displayEl.style.display = "none";
+        }
+        if(product.downloaded){
+            displayDownloadedContent(cordova.file.documentsDirectory, displayEl);
         }
     });
 
