@@ -23,6 +23,7 @@
 var app = {};
 
 app.nonHostedContentUrl = "http://ge.tt/api/1/files/3JSfJhL2/0/blob?download";
+app.packageName = "uk.co.workingedge.test.inapp";
 
 //
 // Constructor
@@ -48,9 +49,9 @@ app.initialize = function() {
 app.onDeviceReady = function() {
     log('onDeviceReady');
     //alert("This alert interrupts the main JS thread so you can connect a remote debugger to the WebView...");
-    setTimeout(function(){
+    //setTimeout(function(){
         this.initStore();
-    }.bind(this), 2000);
+    //}.bind(this), 2000);
     
 };
 
@@ -76,37 +77,37 @@ app.initStore = function() {
     // Inform the store of your products
     log('registerProducts');
     store.register({
-        id:    'uk.co.workingedge.test.inapp.consumable1', 
+        id:    app.packageName + '.' + 'consumable1',
         alias: 'extra life',
         type:   store.CONSUMABLE
     });
 
     store.register({
-        id:    'uk.co.workingedge.test.inapp.nonconsumable1', 
+        id:    app.packageName + '.' + 'nonconsumable1',
         alias: 'full version',
         type:   store.NON_CONSUMABLE
     });
 
     store.register({
-        id:    'uk.co.workingedge.test.inapp.subscription1', 
+        id:    app.packageName + '.' + 'subscription1',
         alias: 'subscription1',
         type:  store.PAID_SUBSCRIPTION
     });
 
     store.register({
-        id:    'uk.co.workingedge.test.inapp.nonconsumablenonhosted1', 
+        id:    app.packageName + '.' + 'nonconsumablenonhosted1',
         alias: 'non-hosted content download',
         type:   store.NON_CONSUMABLE
     });
 
     if(app.platform === "ios"){
         store.register({
-            id:    'uk.co.workingedge.test.inapp.nonconsumablehosted1', 
+            id:    app.packageName + '.' + 'nonconsumablehosted1',
             alias: 'hosted content download',
             type:   store.NON_CONSUMABLE
         });
         store.register({
-            id:    'uk.co.workingedge.test.inapp.nonconsumablehosted2', 
+            id:    app.packageName + '.' + 'nonconsumablehosted2',
             alias: 'hosted content download 2',
             type:   store.NON_CONSUMABLE
         });
