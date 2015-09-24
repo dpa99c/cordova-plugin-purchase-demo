@@ -177,12 +177,14 @@ app.initStore = function() {
 
     // Show progress during hosted content download
     store.when("hosted content download").downloading(function(product) {
+        log("Downloaded "+product.progress + "% of "+product.id);
         var html = 'Downloading content: ' + product.progress + '%';
         document.getElementById('non-consumable-hosted-content-download').innerHTML = html;
     });
 
     // When hosted content download is complete, finish the transaction
     store.when("hosted content download").downloaded(function(product) {
+        log("Finished downloading "+product.id);
         product.finish();
     });
 
@@ -208,12 +210,14 @@ app.initStore = function() {
 
     // Show progress during hosted content download
     store.when("hosted content download 2").downloading(function(product) {
+        log("Downloaded "+product.progress + "% of "+product.id);
         var html = 'Downloading content: ' + product.progress + '%';
         document.getElementById('non-consumable-hosted-content-download').innerHTML = html;
     });
 
     // When hosted content download is complete, finish the transaction
     store.when("hosted content download 2").downloaded(function(product) {
+        log("Finished downloading "+product.id);
         product.finish();
     });
 
