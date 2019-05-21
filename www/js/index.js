@@ -66,8 +66,6 @@ app.initStore = function() {
     app.platform = device.platform.toLowerCase();
     document.getElementsByTagName('body')[0].className = app.platform;
 
-    //debugger;
-
     // Enable maximum logging level
     store.verbosity = store.DEBUG;
 
@@ -328,7 +326,8 @@ app.initStore = function() {
 
 app.renderIAP = function(p) {
 
-    var elId = p.id.split(".").pop();
+    var parts = p.id.split(".");
+    var elId = parts[parts.length-1];
 
     var el = document.getElementById(elId + '-purchase');
     if (!el) return;
