@@ -166,11 +166,14 @@ app.initStore = function() {
     /*
      * iOS Apple-hosted content
      */
+    var getPurchaseType = function(product){
+        return product.transaction.originalId ? "redeemed" : "purchased";
+    };
 
     // When purchase of the downloadable content is approved,
     // show some logs.
     store.when("hosted content download").approved(function (product) {
-        log("You've purchased the content for " + product.id + " - it will now download to your device!");
+        log("You've "+getPurchaseType(product)+" the content for " + product.id + " - it will now download to your device!");
     });
 
     // Show progress during hosted content download
@@ -203,7 +206,7 @@ app.initStore = function() {
     // When purchase of the downloadable content is approved,
     // show some logs.
     store.when("hosted content download 2").approved(function (product) {
-        log("You've purchased the content for " + product.id + " - it will now download to your device!");
+        log("You've "+getPurchaseType(product)+" the content for " + product.id + " - it will now download to your device!");
     });
 
     // Show progress during hosted content download
@@ -239,7 +242,7 @@ app.initStore = function() {
     // When purchase of the downloadable content is approved,
     // show some logs.
     store.when("non-hosted content download").approved(function (product) {
-        log("You've purchased the content for " + product.id + " - it will now download to your device!");
+        log("You've "+getPurchaseType(product)+" the content for " + product.id + " - it will now download to your device!");
         downloadNonHostedContent(product);
     });
 
