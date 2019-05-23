@@ -167,7 +167,7 @@ app.initStore = function() {
      * iOS Apple-hosted content
      */
     var getPurchaseType = function(product){
-        return product.transaction.originalId ? "redeemed" : "purchased";
+        return product.transaction.original_transaction_id ? "redeemed" : "purchased";
     };
 
     // When purchase of the downloadable content is approved,
